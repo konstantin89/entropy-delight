@@ -16,11 +16,10 @@
   ],
   "author": "Kosta Bulgakov",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/konstantin89/entropy-delight/issues"
-  },
   "homepage": "https://github.com/konstantin89/entropy-delight#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
     "mocha": "^6.2.0"
   }
 }

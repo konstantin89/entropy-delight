@@ -14,8 +14,9 @@ class EntropyDelight
 
         let countArray = EntropyDelight._countBytes(buf);
         let freqArray = EntropyDelight._calcFrequency(countArray, buf.length);
-        console.log(freqArray);
+        let entropy = EntropyDelight._calcShanonEntropy(freqArray);
 
+        return entropy;
     }
 
     /**
@@ -39,6 +40,11 @@ class EntropyDelight
         return arr;
     }
 
+    /**
+     * 
+     * @param {Array} countedArray 
+     * @param {number} bufferLength 
+     */
     static _calcFrequency(countedArray, bufferLength)
     {
         let freqArray = countedArray.slice();
@@ -49,6 +55,27 @@ class EntropyDelight
         }
 
         return freqArray;
+    }
+
+    /**
+     * 
+     * @param {Array} frequencyArray 
+     */
+    static _calcShanonEntropy(frequencyArray)
+    {
+        let entropy = 0;
+
+        for(let freq of frequencyArray)
+        {
+            if(freq === 0)
+            {
+                continue;
+            }
+
+            entropy = entropy + freq*Math.log2(freq);
+        }
+            
+        return -entropy;
     }
 }
 
