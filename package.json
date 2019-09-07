@@ -1,0 +1,25 @@
+{
+  "name": "entropy-delight",
+  "version": "1.0.0",
+  "description": "Package of utilities related to calculation of entropy for binary data",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./test/**/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/konstantin89/entropy-delight.git"
+  },
+  "keywords": [
+    "entropy",
+    "binary"
+  ],
+  "author": "Kosta Bulgakov",
+  "license": "MIT",
+  "homepage": "https://github.com/konstantin89/entropy-delight#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.0"
+  }
+}
