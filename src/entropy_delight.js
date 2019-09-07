@@ -1,82 +1,37 @@
+const EntropyUtils = require('./entropy_utils/entropy_utils'); 
+
+/**
+ * @typedef {Object} EntropyData
+ * @property {number} entropy  - Number that represents the calculated entropy.
+ * @property {Array} frequency - Array that contains the frequency of each byte. 
+ */
+
 class EntropyDelight
 {
     /**
-     * 
+     * @brief Method that calculates entropy of given buffer.
      * @param {Buffer} data
+     * @returns {EntropyData}
      */
     static calculateEntropy(buf)
     {
-
         if(buf.length === 0)
         {
             return 0;
         }
 
-        let countArray = EntropyDelight._countBytes(buf);
-        let freqArray = EntropyDelight._calcFrequency(countArray, buf.length);
-        let entropy = EntropyDelight._calcShanonEntropy(freqArray);
+        let countArray = EntropyUtils.countBytes(buf);
+        let freqArray = EntropyUtils.calcFrequency(countArray, buf.length);
+        let entropy = EntropyUtils.calcShanonEntropy(freqArray);
 
-        return entropy;
+        let /** @type {EntropyData} */ returnObj = {
+            entropy: entropy,
+            frequency: freqArray
+        };
+
+        return returnObj;
     }
 
-    /**
-     * 
-     * @param {Buffer} buf 
-     * @returns {Array}
-     */
-    static _countBytes(buf)
-    {
-        let arr = Array();
-        for(let i=0; i<256; i++)
-        {
-            arr.push(0);
-        }
-
-        for(let byte of buf)
-        {
-            arr[byte] = arr[byte] + 1;
-        }
-
-        return arr;
-    }
-
-    /**
-     * 
-     * @param {Array} countedArray 
-     * @param {number} bufferLength 
-     */
-    static _calcFrequency(countedArray, bufferLength)
-    {
-        let freqArray = countedArray.slice();
-        
-        for(let i=0; i<freqArray.length; i++)
-        {
-            freqArray[i] = freqArray[i] / bufferLength;
-        }
-
-        return freqArray;
-    }
-
-    /**
-     * 
-     * @param {Array} frequencyArray 
-     */
-    static _calcShanonEntropy(frequencyArray)
-    {
-        let entropy = 0;
-
-        for(let freq of frequencyArray)
-        {
-            if(freq === 0)
-            {
-                continue;
-            }
-
-            entropy = entropy + freq*Math.log2(freq);
-        }
-            
-        return -entropy;
-    }
 }
 
 module.exports = EntropyDelight;

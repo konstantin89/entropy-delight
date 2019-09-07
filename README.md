@@ -18,4 +18,12 @@ to be encrypted.
 
 ## Testing
 
+Before running the tests for this module make sure to install mocha.
+``` bash
  npm install --global mocha
+ ```
+
+ Once mocha is installed, run the command below.
+ ``` bash
+npm test
+ ```

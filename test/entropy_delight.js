@@ -8,20 +8,31 @@ describe('Tests for CalculateEntropy', function()
     it('Test buffer of zeros', function() 
     {
         let zeroBuf = Buffer.alloc(32, 0);
-        let entropy = EntropyDelight.calculateEntropy(zeroBuf);
-        Assert.equal(entropy, 0);
+        let entropyObj = EntropyDelight.calculateEntropy(zeroBuf);
+
+        Assert.equal(entropyObj.entropy, 0);
+        Assert.equal(entropyObj.frequency.length, 256);
+        Assert.equal(entropyObj.frequency[0], 1);
     });
 
     it('Test buffer of normal distributed numbers', function() 
     {
-        let randBuffer = Buffer.alloc(256, 0);
-        for(let i=0; i<randBuffer.length; i++)
+        let normBuffer = Buffer.alloc(256, 0);
+        for(let i=0; i<normBuffer.length; i++)
         {
-            randBuffer[i] = i;
+            normBuffer[i] = i;
         }
 
-        let entropy = EntropyDelight.calculateEntropy(randBuffer);
-        Assert.equal(entropy, 8);
+        let entropyObj = EntropyDelight.calculateEntropy(normBuffer);
+
+        Assert.equal(entropyObj.entropy, 8);
+        Assert.equal(entropyObj.frequency.length, 256);
+
+        for(let i=0; i<entropyObj.frequency.length; i++)
+        {
+            Assert.equal(entropyObj.frequency[i], 1/256);
+        }
+        
     });
 
     it('Test buffer of random numbers', function() 
@@ -32,11 +43,20 @@ describe('Tests for CalculateEntropy', function()
             randBuffer[i] = Math.floor(Math.random() * Math.floor(256));
         }
 
-        let entropy = EntropyDelight.calculateEntropy(randBuffer);
+        let entropyObj = EntropyDelight.calculateEntropy(randBuffer);
 
-        console.log(entropy);
+        Assert.equal(entropyObj.frequency.length, 256);
+        Assert.isAbove(entropyObj.entropy, 0);
+        Assert.isAtMost(entropyObj.entropy, 8);
 
-        //assert.equal(entropy);
+        let totalFreq = 0;
+
+        for(let i=0; i<entropyObj.frequency.length; i++)
+        {
+            totalFreq += entropyObj.frequency[i];
+        }
+        
+        Assert.equal(totalFreq, 1);
     });
     
 });
