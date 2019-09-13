@@ -16,10 +16,10 @@ to be encrypted.
 
 ## Command line tool
 
-This command line implements command line tool that can be used for calculating    
+This module implements command line tool that can be used for calculating    
 entopy of files. 
 
-To use the command line tool, please use the following command.
+The following command example, can be used for calculating file entropy.
 
 ``` bash
 node ./src/entropy_delight_cli.js --file [file_name]
