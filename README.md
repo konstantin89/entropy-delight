@@ -14,6 +14,16 @@ since the file have large degree of randomness in it.
 Determining the entropy of a file is also useful to detect if it is likely   
 to be encrypted.
 
+## Command line tool
+
+This command line implements command line tool that can be used for calculating    
+entopy of files. 
+
+To use the command line tool, please use the following command.
+
+``` bash
+node ./src/entropy_delight_cli.js --file [file_name]
+```
 
 
 ## Testing
