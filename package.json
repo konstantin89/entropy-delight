@@ -1,8 +1,8 @@
 {
   "name": "entropy-delight",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Package of utilities related to calculation of entropy for binary data",
-  "main": "./scr/entropy_delight.js",
+  "main": "./src/entropy_delight.js",
   "scripts": {
     "test": "mocha ./test/**/*"
   },
